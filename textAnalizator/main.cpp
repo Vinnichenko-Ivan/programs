@@ -92,8 +92,21 @@ vector<pair<string,int>>sortData(vector<pair<string,int>> data)
 			}		
 			else
 			{
-				dataSort.push_back(dataSort1Part[v1]);
-				v1++;
+				if(dataSort1Part[v1].first<dataSort2Part[v2].first)
+				{
+					dataSort.push_back(dataSort2Part[v2]);
+					v2++;
+				}
+				else if(dataSort1Part[v1].first>dataSort2Part[v2].first)
+				{
+					dataSort.push_back(dataSort1Part[v1]);
+					v1++;
+				}		
+				else
+				{
+					dataSort.push_back(dataSort1Part[v1]);
+					v1++;
+				}	
 			}	
 		}
 		else
