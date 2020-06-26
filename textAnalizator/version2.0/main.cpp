@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<vector>
 #include<fstream>
@@ -31,8 +32,9 @@ void outputData(map<int, vector<string>> &sortedData)
 {	
 	ofstream fout;
 	fout.open("output.txt");
-	map<int, vector<string>> :: iterator it = sortedData.begin();
-    for (int i = 0; it != sortedData.end(); it++, i++) {  // выводим их
+	auto it = sortedData.end();
+	it--;
+    for (int i = 0; it != sortedData.begin(); it--, i++) {  // выводим их
     	for(int j=0;j<it->second.size();j++)
     	{
 
@@ -50,21 +52,23 @@ void outputTime(long double time)
 	fout.close();
 }
 
-void sortingData(map<string,int> &data,map<int, vector<string>> &sortedData)
+map<int, vector<string>> sortData(map<string,int> &data)
 {
+	map<int, vector<string>>sortedData;
 	map <string, int> :: iterator it = data.begin();
-    for (int i = 0; it != data.end(); it++, i++) {  // выводим их
+    for (int i = 0; it != data.end(); it++, i++) 
+    { 
         //fout << it->first << '\t' << it->second << '\n';
         sortedData[it->second].push_back(it->first);
     }	
+    return sortedData;
 }
 
 int main()
 {	
 	long double start= clock(); 
-	map<int, vector<string>> sortedData;
 	auto data = inputData();
-	sortingData(data,sortedData);
+	auto sortedData = sortData(data);
 	outputData(sortedData);
 	long double end = clock(); // засекаем время окончания
     long double t = (end - start) / CLOCKS_PER_SEC;
