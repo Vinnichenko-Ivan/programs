@@ -34,11 +34,9 @@ void outputData(map<int, vector<string>> &sortedData)
 	fout.open("output.txt");
 	auto it = sortedData.rbegin();
     for (int i = 0; it != sortedData.rend(); it++, i++) {  // выводим их
-    	for(int j=0;j<it->second.size();j++)
-    	{
-
-    		fout << it->second[j] << '\t' << it->first<< '\n';
-    	}
+		for (auto & val: it->second) {
+		    fout << val << '\t' << it->first << '\n';
+		}
     }
 	fout.close();
 }
