@@ -7,8 +7,9 @@
 
 using namespace std;
 
-void inputData(map<string,int> &data)
+map<string,int> inputData()
 {
+	map<string,int> data;
 	ifstream fin("input.txt");
 	string buff;
 	while(fin >> buff)
@@ -23,7 +24,7 @@ void inputData(map<string,int> &data)
 		}
 	}
 	fin.close();
-	return;
+	return data;
 }
 
 void outputData(map<int, vector<string>> &sortedData)
@@ -61,9 +62,8 @@ void sortingData(map<string,int> &data,map<int, vector<string>> &sortedData)
 int main()
 {	
 	long double start= clock(); 
-	map<string,int> data;
 	map<int, vector<string>> sortedData;
-	inputData(data);
+	auto data = inputData();
 	sortingData(data,sortedData);
 	outputData(sortedData);
 	long double end = clock(); // засекаем время окончания
