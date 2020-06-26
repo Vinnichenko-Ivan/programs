@@ -28,12 +28,12 @@ map<string,int> inputData()
 	return data;
 }
 
-void outputData(map<int, vector<string>> &sortedData)
+void outputData(const map<int,  vector<string>> &sortedData)
 {	
 	ofstream fout;
 	fout.open("output.txt");
-	auto it = sortedData.rbegin();
-    for (int i = 0; it != sortedData.rend(); it++, i++) {  // выводим их
+	auto it = sortedData.сrbegin();
+    for (int i = 0; it != sortedData.сrend(); it++, i++) {  // выводим их
 		for (auto & val: it->second) {
 		    fout << val << '\t' << it->first << '\n';
 		}
