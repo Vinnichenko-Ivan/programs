@@ -32,8 +32,8 @@ void outputData(const map<int,  vector<string>> &sortedData)
 {	
 	ofstream fout;
 	fout.open("output.txt");
-	auto it = sortedData.сrbegin();
-    for (int i = 0; it != sortedData.сrend(); it++, i++) {  // выводим их
+	auto it = sortedData.crbegin();
+    for (int i = 0; it != sortedData.crend(); it++, i++) {  // выводим их
 		for (auto & val: it->second) {
 		    fout << val << '\t' << it->first << '\n';
 		}
