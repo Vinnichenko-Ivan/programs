@@ -1,4 +1,7 @@
 class data
 {
-	string nameSite, nameAccount, mail,password;
+	protected:
+		string nameSite, nameAccount, mail,password;
+	public:
+		void 	
 };
