@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int searchElement(vector<pair<string,int>> data,string element)
+int searchElement(vector<pair<string,int>> &data,string element)
 {
 
 	for(int i=0;i<data.size();i++)
