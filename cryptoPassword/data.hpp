@@ -1,4 +1,4 @@
-class data
+class ata
 {
 	protected:
 		string nameSite, nameAccount, mail,password;
