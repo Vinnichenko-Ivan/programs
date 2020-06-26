@@ -2,6 +2,7 @@
 #include<vector>
 #include<fstream>
 #include <algorithm>
+#include <ctime>
 
 using namespace std;
 
@@ -41,6 +42,14 @@ void outputData(vector<pair<string,int>>data)
 	}
 	fout.close();
 }
+void outputTime(long double time)
+{	
+	ofstream fout;
+	fout.open("outputTime.txt");
+	fout<<time;
+	fout.close();
+}
+
 
 // vector<string> clearingData(vector<string>inData)
 // {
@@ -155,6 +164,7 @@ vector<pair<string,int>>analizeData(vector<string>strData)
 
 int main()
 {	
+	long double start= clock(); 
 	vector<string> inData;
 	vector<pair<string,int>> data;
 	vector<pair<string,int>> data2;
@@ -164,5 +174,9 @@ int main()
 	data.assign( data.rbegin(), data.rend() );
 	outputData(data);
 	//cout<<data.size();
+	long double end = clock(); // засекаем время окончания
+    long double t = (end - start) / CLOCKS_PER_SEC;
+    cout<<t;
+	outputTime(t);
 	return 0;
 }
