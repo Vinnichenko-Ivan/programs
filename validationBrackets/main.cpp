@@ -18,7 +18,7 @@ class ValidationBrackets
 	public:
 		ValidationBrackets(auto inBrakets);
 		void addBrakets(auto inBrakets);
-		bool assert( string &text);
+		bool assert(const string &text);
 };
 
 void ValidationBrackets::addBrakets(auto inBrakets)
@@ -30,18 +30,18 @@ void ValidationBrackets::addBrakets(auto inBrakets)
 	}
 }
 
-bool ValidationBrackets::assert( string &text)
+bool ValidationBrackets::assert(const string &text)
 {
 	vector<char>stack;
-	for(int i=0;i<text.size();i++)
+	for(auto & symbol: text)
 	{
-		if(pairBraketsOpen[text[i]]!=0)
+		if(pairBraketsOpen[symbol]!=0)
 		{
-			stack.push_back(text[i]);
+			stack.push_back(symbol);
 		}
-		if(pairBraketsClose[text[i]]!=0)
+		if(pairBraketsClose[symbol]!=0)
 		{
-			if(stack[stack.size()-1]==pairBraketsClose[text[i]]&&stack.size()>0)
+			if(stack[stack.size()-1]==pairBraketsClose[symbol]&&stack.size()>0)
 			{
 				stack.pop_back();
 			}
