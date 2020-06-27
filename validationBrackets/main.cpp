@@ -17,9 +17,18 @@ class ValidationBrackets
 		//bool coorect(auto &countBrakets,auto &inBrakets);
 	public:
 		ValidationBrackets(auto inBrakets);
-		//void addBrakets(auto &brakets);
+		void addBrakets(auto inBrakets);
 		bool assert( string &text);
 };
+
+void ValidationBrackets::addBrakets(auto inBrakets)
+{
+	for(int i =0;i<inBrakets.size();i++)
+	{
+		pairBraketsOpen[inBrakets[i].first]=inBrakets[i].second;
+		pairBraketsClose[inBrakets[i].second]=inBrakets[i].first;
+	}
+}
 
 bool ValidationBrackets::assert( string &text)
 {
