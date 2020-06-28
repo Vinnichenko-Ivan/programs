@@ -36,7 +36,7 @@ int Node::size(int sizeIn)
 
 int Node::getNReverseNodeData(int i)
 {
-	return getNNodeData(size()-i);
+	return getNNodeData(size(0)-i);
 	
 }
 
@@ -94,11 +94,12 @@ int main()
 	long double start= clock(); 
 	Node * first=new Node(0);
 	
-	for(int i =1;i<100;i++)
+	for(int i =1;i<100000;i++)
 	{
-		first->push_back(i*2);
+		first->push_back(i);
 	}
 	cout<<first->getNNodeData(7)<<endl;
+	cout<<first->getNReverseNodeData(7)<<endl;
 	long double end = clock(); // засекаем время окончания
     long double t = (end - start) / CLOCKS_PER_SEC;
     cout<<t;
