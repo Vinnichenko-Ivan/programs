@@ -21,14 +21,14 @@ Node::Node(const int inData)
 	nextNode=nullptr;
 }
 
-int getNNodeData(Node * buffNode,int i)
+int getNNodeData(Node * buffNode,size_t i)
 {
 	for(;i!=0;i--)
 		buffNode=buffNode->nextNode;
 	return buffNode->data;
 }
 
-int getNNodeReversData(Node * buffNode,int i)
+int getNNodeReversData(Node * buffNode,size_t i)
 {
 	Node * first=buffNode;
 	for(;i!=0;i--)
