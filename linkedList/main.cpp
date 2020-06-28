@@ -16,13 +16,11 @@ struct Node
 		Node(const int inData);
 };
 
-
-
-// int Node::getNReverseNodeData(int i)
-// {
-// 	return getNNodeData(size(0)-i);
-	
-//}
+Node::Node(const int inData)
+{
+	data=inData;
+	nextNode=nullptr;
+}
 
 int getNNodeData(Node * buffNode,int i)
 {
@@ -43,16 +41,6 @@ int getNNodeReversData(Node * buffNode,int i)
 	}
 	return first->data;
 }
-// Node* Node::getNextNode()
-// {
-// 	return nextNode;
-// }
-
-Node::Node(const int inData)
-{
-	data=inData;
-	nextNode=nullptr;
-}
 
 void push_back(Node * buffNode,const int inData)
 {
@@ -62,8 +50,6 @@ void push_back(Node * buffNode,const int inData)
 	}
 	buffNode->nextNode= new Node(inData);
 }
-
-
 
 void outputTime(long double time)
 {	
