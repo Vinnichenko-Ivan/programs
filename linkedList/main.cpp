@@ -76,9 +76,9 @@ int main()
 	
 	for(int i =1;i<100;i++)
 	{
-		first->push_back(i);
+		first->push_back(i*2);
 	}
-	cout<<first->getNNodeData(3)<<endl;
+	cout<<first->getNNodeData(7)<<endl;
 	long double end = clock(); // засекаем время окончания
     long double t = (end - start) / CLOCKS_PER_SEC;
     cout<<t;
