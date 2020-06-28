@@ -14,69 +14,53 @@ struct Node
 		Node * nextNode;
 		int data;
 		Node(const int inData);
-		void push_back(const int inData);
-		Node* getNode();
-		Node* getNextNode();
-		int getNNodeData(int i);
-		int getNReverseNodeData(int i);
-		int size(int sizeIn);
 };
 
-int Node::size(int sizeIn)
-{
-	if(nextNode==NULL)
-	{
-		return sizeIn;
-	}
-	else
-	{
-		nextNode->size(sizeIn+1);
-	}
-}
 
-int Node::getNReverseNodeData(int i)
-{
-	return getNNodeData(size(0)-i);
+
+// int Node::getNReverseNodeData(int i)
+// {
+// 	return getNNodeData(size(0)-i);
 	
+//}
+
+int getNNodeData(Node * buffNode,int i)
+{
+	for(;i!=0;i--)
+		buffNode=buffNode->nextNode;
+	return buffNode->data;
 }
 
-int Node::getNNodeData(int i)
+int getNNodeReversData(Node * buffNode,int i)
 {
-	if(i==0)
+	Node * first=buffNode;
+	for(;i!=0;i--)
+		buffNode=buffNode->nextNode;
+	while(buffNode->nextNode!=nullptr)
 	{
-		return data;
+		first = first->nextNode;
+		buffNode=buffNode->nextNode;
 	}
-	else if(nextNode==NULL)
-	{
-		return NULL;
-	}
-	else
-	{
-		nextNode->getNNodeData(i-1);
-	}
+	return first->data;
 }
-
-Node* Node::getNextNode()
-{
-	return nextNode;
-}
+// Node* Node::getNextNode()
+// {
+// 	return nextNode;
+// }
 
 Node::Node(const int inData)
 {
 	data=inData;
-	nextNode=NULL;
+	nextNode=nullptr;
 }
 
-void Node::push_back(const int inData)
+void push_back(Node * buffNode,const int inData)
 {
-	if(nextNode==NULL)
+	while(buffNode->nextNode!=nullptr)
 	{
-		nextNode=new Node(inData);
+		buffNode=buffNode->nextNode;
 	}
-	else
-	{
-		nextNode->push_back(inData);
-	}
+	buffNode->nextNode= new Node(inData);
 }
 
 
@@ -96,10 +80,10 @@ int main()
 	
 	for(int i =1;i<100000;i++)
 	{
-		first->push_back(i);
+		push_back(first,i);
 	}
-	cout<<first->getNNodeData(7)<<endl;
-	cout<<first->getNReverseNodeData(7)<<endl;
+	cout<<getNNodeData(first,7)<<endl;
+	cout<<getNNodeReversData(first,7)<<endl;
 	long double end = clock(); // засекаем время окончания
     long double t = (end - start) / CLOCKS_PER_SEC;
     cout<<t;
