@@ -13,8 +13,8 @@ struct Node
 	public:
 		Node * nextNode;
 		int data;
-		Node(int inData);
-		void push_back(int inData);
+		Node(const int inData);
+		void push_back(const int inData);
 		Node* getNode();
 		Node* getNextNode();
 		int getNNodeData(int i);
@@ -41,13 +41,13 @@ Node* Node::getNextNode()
 	return nextNode;
 }
 
-Node::Node(int inData)
+Node::Node(const int inData)
 {
 	data=inData;
 	nextNode=NULL;
 }
 
-void Node::push_back(int inData)
+void Node::push_back(const int inData)
 {
 	if(nextNode==NULL)
 	{
@@ -73,9 +73,12 @@ int main()
 {	
 	long double start= clock(); 
 	Node * first=new Node(0);
-	first->push_back(2);
-
-	cout<<first->getNNodeData(1)<<endl;
+	
+	for(int i =1;i<100;i++)
+	{
+		first->push_back(i);
+	}
+	cout<<first->getNNodeData(3)<<endl;
 	long double end = clock(); // засекаем время окончания
     long double t = (end - start) / CLOCKS_PER_SEC;
     cout<<t;
