@@ -10,10 +10,9 @@ using namespace std;
 
 struct Node
 {
-	public:
-		Node * nextNode;
-		int data;
-		Node(const int inData);
+	Node * nextNode;
+	int data;
+	Node(const int inData);
 };
 
 Node::Node(const int inData)
