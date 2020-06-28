@@ -18,7 +18,27 @@ struct Node
 		Node* getNode();
 		Node* getNextNode();
 		int getNNodeData(int i);
+		int getNReverseNodeData(int i);
+		int size(int sizeIn);
 };
+
+int Node::size(int sizeIn)
+{
+	if(nextNode==NULL)
+	{
+		return sizeIn;
+	}
+	else
+	{
+		nextNode->size(sizeIn+1);
+	}
+}
+
+int Node::getNReverseNodeData(int i)
+{
+	return getNNodeData(size()-i);
+	
+}
 
 int Node::getNNodeData(int i)
 {
