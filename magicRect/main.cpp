@@ -126,17 +126,20 @@ bool testingRect(vector<vector<int>> &testRect)
 	return 1;
 }
 
-void magicRectGenerator(int n, int x, int y, vector<vector<int>> &rect,ofstream &fout)
+void magicRectGenerator(int n, int x, int y, vector<bool> &usingNumbers, vector<vector<int>> &rect,ofstream &fout)
 {
 	//cout<<x<<" "<<y<<endl;
 	if( x == n - 1 && y == n - 1)
 	{
-		for(int i = 1; i <= n * n;i++)
+		for(int i = 0; i < n * n; i++)
 		{
-			rect[x][y]=i;
-			if(testingRect(rect))
+			if(!usingNumbers[i])
 			{
-				saveRect(rect, fout);
+				rect[x][y] = i;
+				if(testingRect(rect))
+				{
+					saveRect(rect, fout);
+				}
 			}
 		}
 		return;
@@ -144,19 +147,30 @@ void magicRectGenerator(int n, int x, int y, vector<vector<int>> &rect,ofstream 
 
 	else if(x==n-1)
 	{
-		for(int i = 1;i <= n * n;i++)
+		for(int i = 0; i < n * n; i++)
 		{
-			rect[x][y] =i ;
-			magicRectGenerator(n, 0, y+1, rect, fout);
+			if(!usingNumbers[i])
+			{
+				usingNumbers[i] = true;
+				rect[x][y] = i;
+				magicRectGenerator(n, 0, y+1, usingNumbers, rect, fout);
+				usingNumbers[i] = false;
+			}
 		}
 		return;
 	}
 
-	for(int i = 1; i <= n * n;i++)
+	for(int i = 0; i < n * n; i++)
 	{
-		rect[x][y]=i;
-		magicRectGenerator(n, x+1, y, rect, fout);
+		if(!usingNumbers[i])
+		{
+			usingNumbers[i] = true;
+			rect[x][y] = i;
+			magicRectGenerator(n, x+1, y, usingNumbers, rect, fout);
+			usingNumbers[i] = false;
+		}
 	}
+
 	return;
 }
 
@@ -165,7 +179,8 @@ void testSystem(ofstream &fout)
 	for(int i = 1;1;i++)
 	{
 		cout<<endl<<endl<<"start testing n = "<<i<<endl<<endl;
-		vector<vector<int>> testRect (i,vector<int>(i));
+		vector<vector<int>> testRect(i,vector<int>(i));
+		vector<bool> usingNumbers(n * n, false);
 		fout<<endl<<endl<<"start testing n = "<<i<<endl<<endl;
 		long double start= clock(); 
 		magicRectGenerator(i,0,0,testRect,fout);
