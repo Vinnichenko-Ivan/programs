@@ -48,27 +48,7 @@ void saveRect(vector<vector<int>> &rect,ofstream &fout)
 bool testingRect(vector<vector<int>> &testRect)
 {
 	int size = testRect.size();
-	int sum = 0;
-	vector<bool> usingNumber(size+1,false);
-	for(int x = 0; x<size; x++)
-	{
-		for(int y = 0; y<size; y++)
-		{
-			if(!usingNumber[testRect[x][y]])
-			{
-				usingNumber[testRect[x][y]] = true;
-			}
-			else
-			{
-				return 0;
-			}
-		}
-	}	
-
-	for(int x = 0; x < size; x++)
-	{
-		sum+=testRect[x][0];
-	}
+	int sum = size * (size*size+1)/2;
 
 	for(int x = 0; x < size; x++)
 	{
@@ -113,7 +93,7 @@ bool testingRect(vector<vector<int>> &testRect)
 
 	buffSum = 0;
 	
-	for(int x = 0, y = size-1; x<  size; x++,y--)
+	for(int x = 0, y = size-1; x < size; x++,y--)
 	{
 		buffSum += testRect[x][y];
 	}
@@ -135,7 +115,7 @@ void magicRectGenerator(int n, int x, int y, vector<bool> &usingNumbers, vector<
 		{
 			if(!usingNumbers[i])
 			{
-				rect[x][y] = i;
+				rect[x][y] = i + 1;
 				if(testingRect(rect))
 				{
 					saveRect(rect, fout);
@@ -152,8 +132,19 @@ void magicRectGenerator(int n, int x, int y, vector<bool> &usingNumbers, vector<
 			if(!usingNumbers[i])
 			{
 				usingNumbers[i] = true;
-				rect[x][y] = i;
-				magicRectGenerator(n, 0, y+1, usingNumbers, rect, fout);
+				rect[x][y] = i + 1;
+
+				int buffSum=0;
+
+				for(int j = 0; j<n ;j++)
+				{
+					buffSum += rect[j][y];
+				}
+
+				if(buffSum == n * (n * n + 1)/2)
+				{
+					magicRectGenerator(n, 0, y+1, usingNumbers, rect, fout);
+				}			
 				usingNumbers[i] = false;
 			}
 		}
@@ -165,7 +156,7 @@ void magicRectGenerator(int n, int x, int y, vector<bool> &usingNumbers, vector<
 		if(!usingNumbers[i])
 		{
 			usingNumbers[i] = true;
-			rect[x][y] = i;
+			rect[x][y] = i + 1;
 			magicRectGenerator(n, x+1, y, usingNumbers, rect, fout);
 			usingNumbers[i] = false;
 		}
@@ -180,10 +171,10 @@ void testSystem(ofstream &fout)
 	{
 		cout<<endl<<endl<<"start testing n = "<<i<<endl<<endl;
 		vector<vector<int>> testRect(i,vector<int>(i));
-		vector<bool> usingNumbers(n * n, false);
+		vector<bool> usingNumbers(i * i, false);
 		fout<<endl<<endl<<"start testing n = "<<i<<endl<<endl;
 		long double start= clock(); 
-		magicRectGenerator(i,0,0,testRect,fout);
+		magicRectGenerator(i, 0, 0 , usingNumbers, testRect, fout);
 		long double end = clock(); // засекаем время окончания
     	long double t = (end - start) / CLOCKS_PER_SEC;
     	fout<<"testing end"<< endl << "time = "<<t<<endl<<endl;
