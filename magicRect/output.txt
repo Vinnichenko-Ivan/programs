@@ -1,0 +1,20 @@
+
+
+start testing n = 1
+
+1 
+
+testing end
+time = 1.3e-05
+
+
+
+start testing n = 2
+
+testing end
+time = 0.000116
+
+
+
+start testing n = 3
+
