@@ -10,6 +10,7 @@ using namespace std;
 
 struct Node
 {
+<<<<<<< HEAD
 	public:
 		Node * nextNode;
 		int data;
@@ -109,32 +110,47 @@ int Node::getNNodeData(int i)
 	{
 		return nextNode->getNNodeData(i-1);
 	}
-}
+=======
+	Node * nextNode;
+	int data;
+	Node(const int inData);
+};
 
-Node* Node::getNextNode()
-{
-	return nextNode;
-}
-
-Node::Node(int inData)
+Node::Node(const int inData)
 {
 	data=inData;
-	nextNode=NULL;
+	nextNode=nullptr;
+>>>>>>> aeb62e7940bebfe2a8d6e7124ce0a83f52c32c08
 }
 
-void Node::push_back(int inData)
+int getNNodeData(Node * buffNode,size_t i)
 {
-	if(nextNode==NULL)
-	{
-		nextNode=new Node(inData);
-	}
-	else
-	{
-		nextNode->push_back(inData);
-	}
+	for(;i!=0;i--)
+		buffNode=buffNode->nextNode;
+	return buffNode->data;
 }
 
+int getNNodeReversData(Node * buffNode,size_t i)
+{
+	Node * first=buffNode;
+	for(;i!=0;i--)
+		buffNode=buffNode->nextNode;
+	while(buffNode->nextNode!=nullptr)
+	{
+		first = first->nextNode;
+		buffNode=buffNode->nextNode;
+	}
+	return first->data;
+}
 
+void push_back(Node * buffNode,const int inData)
+{
+	while(buffNode->nextNode!=nullptr)
+	{
+		buffNode=buffNode->nextNode;
+	}
+	buffNode->nextNode= new Node(inData);
+}
 
 void outputTime(long double time)
 {	
@@ -148,6 +164,7 @@ int main()
 {	
 	long double start= clock(); 
 	Node * first=new Node(0);
+<<<<<<< HEAD
 	first->push_back(2);
 	first->insert(1,3);
 	first->push_back(4);
@@ -157,6 +174,15 @@ int main()
 	cout<<first->getNNodeData(2)<<endl;
 	cout<<first->getNNodeData(3)<<endl;
 	cout<<first->find(2)<<endl;
+=======
+	
+	for(int i =1;i<100000;i++)
+	{
+		push_back(first,i);
+	}
+	cout<<getNNodeData(first,7)<<endl;
+	cout<<getNNodeReversData(first,7)<<endl;
+>>>>>>> aeb62e7940bebfe2a8d6e7124ce0a83f52c32c08
 	long double end = clock(); // засекаем время окончания
     long double t = (end - start) / CLOCKS_PER_SEC;
     cout<<t;
